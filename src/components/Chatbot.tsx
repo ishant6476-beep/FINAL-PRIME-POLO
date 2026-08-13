@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Bot, MessageCircle, Send, Sparkles, X } from "lucide-react";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { sendBusinessEmail } from "../lib/email";
 import { isSupabaseConfigured, supabase } from "../lib/supabase";
 
 interface Message {
@@ -13,10 +12,10 @@ const suggestions = ["What services do you offer?", "How much does it cost?", "H
 
 export function getBotResponse(message: string) {
   const input = message.toLowerCase();
-  if (/price|pricing|cost|budget/.test(input)) return "Engagements typically range from INR 2L to INR 50L+ per month, depending on scope and media. A short diagnostic call lets us recommend the right model.";
-  if (/service|offer|do you do|seo|ads|website/.test(input)) return "Prime Polo covers growth strategy, paid media, SEO, automation, social, creator marketing, brand systems, content and conversion-led websites.";
+  if (/price|pricing|cost|budget/.test(input)) return "Engagements typically range from INR 2L to INR 50L+ per month, depending on scope and media. A short diagnostic call lets us recommend the right fit.";
+  if (/service|offer|do you do|seo|ads|website/.test(input)) return "Prime Polo covers growth strategy, paid media, SEO, automation, social, creator marketing, brand systems, content and conversion optimization.";
   if (/process|start|begin|work together/.test(input)) return "We move through five stages: Discovery, Strategy, Execution, Optimization and Scale. Start with a no-pressure growth diagnostic through the contact form.";
-  if (/industr|health|education|real estate|e-commerce|startup/.test(input)) return "We have deep experience in healthcare, education, real estate, hospitality, e-commerce, startups, professional services and local business.";
+  if (/industr|health|education|real estate|e-commerce|startup/.test(input)) return "We have deep experience in healthcare, education, real estate, hospitality, e-commerce, startups, professional services and tech.";
   if (/contact|email|phone|hours|location|delhi/.test(input)) return "Reach us at primepolo03@gmail.com. We are based in New Delhi and available Monday-Friday, 10:00-19:00 IST.";
   if (/result|roas|performance|timeline/.test(input)) return "Partners commonly see leading indicators in 30-60 days. Across our roster, average ROAS is 7.1x and client retention is 94%.";
   return "That is a thoughtful question. Prime Polo builds AI-powered growth systems around your commercial goals. For a tailored answer, email primepolo03@gmail.com or begin a growth diagnostic below.";
@@ -45,11 +44,12 @@ export function Chatbot() {
       setTyping(false);
     }, 650);
 
-    const tasks: Promise<unknown>[] = [
-      sendBusinessEmail("Prime Polo chatbot exchange", `Visitor: ${message}\n\nAssistant: ${reply}`),
-    ];
-    if (isSupabaseConfigured) tasks.push(Promise.resolve(supabase.from("chat_logs").insert({ user_message: message, bot_reply: reply })));
-    await Promise.allSettled(tasks);
+    // Store in Supabase for conversation history only (no email spam)
+    if (isSupabaseConfigured) {
+      void supabase.from("chat_logs").insert({ user_message: message, bot_reply: reply }).catch(() => {
+        // Fail silently - chatbot response already shown to user
+      });
+    }
   };
 
   const submit = (event: FormEvent) => {
