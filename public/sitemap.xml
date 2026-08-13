@@ -4,9 +4,9 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   
-  <!-- Prime Polo Marketing Agency - Main Pages -->
+  <!-- Prime Polo Marketing Agency - Public Pages Only -->
   
-  <!-- Homepage - Primary landing page -->
+  <!-- Homepage -->
   <url>
     <loc>https://primepolomarketing.in/</loc>
     <lastmod>2026-02-01</lastmod>
@@ -18,25 +18,17 @@
   <url>
     <loc>https://primepolomarketing.in/terms</loc>
     <lastmod>2026-02-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
   <url>
     <loc>https://primepolomarketing.in/privacy</loc>
     <lastmod>2026-02-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
-  <!-- Customer Dashboard (authenticated) -->
-  <url>
-    <loc>https://primepolomarketing.in/dashboard</loc>
-    <lastmod>2026-02-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <!-- Note: /admin excluded - staff only, no indexing -->
+  <!-- Note: /dashboard and /admin are excluded - private authenticated routes, no public indexing -->
   
 </urlset>
