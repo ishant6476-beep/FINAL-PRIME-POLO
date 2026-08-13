@@ -1,0 +1,16 @@
+# Environment (contains Supabase anon key)
+env.local
+.env.local
+.env
+
+# Build output
+dist
+
+# Dependencies
+node_modules
+
+# Misc
+.DS_Store
+.vscode/
+.idea/
+*.log

@@ -1,0 +1,13 @@
+# Prime Polo Marketing Agency
+# https://primepolomarketing.in
+
+User-agent: *
+Allow: /
+
+# Block admin area
+Disallow: /admin
+
+# Block API routes
+Disallow: /api
+
+Sitemap: https://primepolomarketing.in/sitemap.xml
