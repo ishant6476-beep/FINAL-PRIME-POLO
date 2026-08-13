@@ -85,7 +85,7 @@ function Hero() {
           <div className="rotating-line">
             <span>Build Your</span>
             <AnimatePresence mode="wait">
-              <motion.strong key={words[word]} initial={{ opacity: 0, y: 16, filter: "blur(6px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -16, filter: "blur(6px)" }} transition={{ duration: 0.45 }}>{words[word]}</motion.strong>
+              <motion.strong key={words[word]} initial={{ opacity: 0, y: 16, filter: "blur(6px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -16, filter: "blur(6px)" }} transition={{ duration: 0.5 }}>{words[word]}</motion.strong>
             </AnimatePresence>
           </div>
           <p>AI-powered marketing, automation, websites and performance strategies for ambitious brands ready to turn attention into durable, measurable growth.</p>
@@ -107,7 +107,7 @@ function Solutions() {
   return (
     <section className="section solutions" id="solutions">
       <div className="container-elite">
-        <SectionHeading tag="✦ Solutions" title={<>A Full-Stack <span className="text-gradient-gold">Growth Partner</span></>} copy="Strategy, creative, technology and media working as one compounding system." />
+        <SectionHeading tag="✦ Solutions" title={<>A Full-Stack <span className="text-gradient-gold">Growth Partner</span></>} copy="Strategy, creative, technology and media working as one coherent system." />
         <div className="capabilities-grid">
           {capabilities.map((item, index) => {
             const Icon = item.icon;
@@ -137,7 +137,7 @@ function Services() {
         <div className="services-grid">
           {services.map((service, index) => {
             const Icon = service.icon;
-            return <Reveal key={service.title} delay={(index % 4) * 0.06}><article className="service-item"><span className="service-number">0{index + 1}</span><Icon /><h3>{service.title}</h3><p>{service.description}</p><a href="#contact">Learn More<ArrowUpRight /></a></article></Reveal>;
+            return <Reveal key={service.title} delay={(index % 4) * 0.06}><article className="service-item"><span className="service-number">0{index + 1}</span><Icon /><h3>{service.title}</h3><p>{service.description}</p></article></Reveal>;
           })}
         </div>
         <div className="center-action"><button className="btn-outline" onClick={() => setExpanded((value) => !value)}>{expanded ? "Close Services" : "View All Services"}{expanded ? <Minus /> : <Plus />}</button></div>
@@ -149,7 +149,7 @@ function Services() {
               <div className="catalog-grid">
                 {serviceCatalog.map((group, index) => {
                   const Icon = group.icon;
-                  return <motion.article key={group.category} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (index % 4) * 0.05 }}><div><Icon /><b>{String(index + 1).padStart(2, "0")}</b></div><h4>{group.category}</h4><ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul></motion.article>;
+                  return <motion.article key={group.category} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (index % 4) * 0.05 }}><div><Icon /><h4>{group.category}</h4></div><ul>{group.services.map((svc) => <li key={svc}>{svc}</li>)}</ul></motion.article>;
                 })}
               </div>
             </motion.div>
@@ -167,7 +167,7 @@ function Industries() {
       <div className="container-elite">
         <SectionHeading tag="✦ Industries" title={<>Category <span className="text-gradient-gold">Expertise</span></>} copy="Domain fluency shortens the distance between insight and impact." />
         <div className="industry-grid">
-          {industries.map(([name, copy, code], index) => <Reveal key={name} delay={(index % 4) * 0.05}><article className="industry-item"><span className="industry-emoji" aria-hidden="true">{emoji[index]}</span><small>{code} / 0{index + 1}</small><h3>{name}</h3><p>{copy}</p><ArrowUpRight /></article></Reveal>)}
+          {industries.map(([name, copy, code], index) => <Reveal key={name} delay={(index % 4) * 0.05}><article className="industry-item"><span className="industry-emoji" aria-hidden="true">{emoji[index]}</span><h3>{name}</h3><p>{copy}</p></article></Reveal>)}
         </div>
       </div>
     </section>
@@ -181,7 +181,7 @@ function ProgressRing({ stat, index }: { stat: typeof resultStats[number]; index
       <article className="result-ring">
         <svg viewBox="0 0 160 160">
           <circle cx="80" cy="80" r="70" className="ring-track" />
-          <motion.circle cx="80" cy="80" r="70" className={`ring-value ring-${stat.color}`} strokeDasharray={circumference} initial={{ strokeDashoffset: circumference }} whileInView={{ strokeDashoffset: circumference * (1 - stat.progress / 100) }} viewport={{ once: true }} transition={{ duration: 1.4, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }} />
+          <motion.circle cx="80" cy="80" r="70" className={`ring-value ring-${stat.color}`} strokeDasharray={circumference} initial={{ strokeDashoffset: circumference }} whileInView={{ strokeDashoffset: circumference * (1 - stat.progress / 100) }} viewport={{ once: true }} transition={{ duration: 1.2, ease: "easeOut" }} />
         </svg>
         <strong><CountUp to={stat.value} prefix={stat.prefix} suffix={stat.suffix} decimals={stat.decimals} /></strong>
         <span>{stat.label}</span>
@@ -196,13 +196,13 @@ function Results() {
     <section className="section results" id="results">
       <Aurora compact />
       <div className="container-elite relative z-10">
-        <SectionHeading tag="✦ Results" title={<>Numbers We're <span className="text-gradient-elite">Proud Of</span></>} copy="A scorecard built around commercial movement, not presentation theatre." align="center" />
+        <SectionHeading tag="✦ Results" title={<>Numbers We're <span className="text-gradient-elite">Proud Of</span></>} copy="A scorecard built around commercial movement, not presentation theatrics." />
         <div className="rings-grid">{resultStats.map((stat, index) => <ProgressRing key={stat.label} stat={stat} index={index} />)}</div>
         <Reveal className="pipeline-chart glass-elite">
           <div className="chart-title"><div><span>Client Pipeline Growth</span><small>Quarterly growth index</small></div><strong>+142%<small>vs. baseline</small></strong></div>
           <div className="chart-area">
             <div className="chart-lines"><span /><span /><span /><span /></div>
-            <div className="bars">{bars.map((height, index) => <div key={height}><motion.span initial={{ height: 0 }} whileInView={{ height: `${height}%` }} viewport={{ once: true }} transition={{ duration: 0.8, delay: index * 0.08 }}><i>{height}</i></motion.span><small>Q{index + 1}</small></div>)}</div>
+            <div className="bars">{bars.map((height, index) => <div key={height}><motion.span initial={{ height: 0 }} whileInView={{ height: `${height}%` }} viewport={{ once: true }} transition={{ delay: index * 0.05, duration: 0.6 }} /></div>)}</div>
           </div>
         </Reveal>
       </div>
@@ -217,7 +217,7 @@ function CaseStudies() {
   return (
     <section className="section cases" id="casestudies">
       <div className="container-elite">
-        <div className="heading-row"><SectionHeading tag="✦ Case Studies" title={<>Featured <span className="text-gradient-gold">Work</span></>} copy="Growth systems translated into category-defining outcomes." /><div className="carousel-controls"><button onClick={() => change(-1)} aria-label="Previous case study"><ArrowLeft /></button><button onClick={() => change(1)} aria-label="Next case study"><ArrowRight /></button></div></div>
+        <div className="heading-row"><SectionHeading tag="✦ Case Studies" title={<>Featured <span className="text-gradient-gold">Work</span></>} copy="Growth systems translated into category-defining results." /></div>
         <div className="case-stage">
           <AnimatePresence mode="wait">
             <motion.article key={item.client} className="case-slide" initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -40 }} transition={{ duration: 0.5 }}>
@@ -226,13 +226,13 @@ function CaseStudies() {
               <div className="case-info">
                 <span>{item.industry} / 0{active + 1}</span><h3>{item.client}</h3><p>{item.challenge}</p>
                 <div className="case-metrics">{item.metrics.map(([value, label]) => <div key={label}><TrendingUp /><strong>{value}</strong><span>{label}</span></div>)}</div>
-                <blockquote>“{item.quote}”</blockquote>
+                <blockquote>"{item.quote}"</blockquote>
                 <PrimaryButton href="#contact">Get Similar Results</PrimaryButton>
               </div>
             </motion.article>
           </AnimatePresence>
         </div>
-        <div className="case-dots">{caseStudies.map((study, index) => <button key={study.client} onClick={() => setActive(index)} className={index === active ? "active" : ""} aria-label={`Show ${study.client}`}><span /></button>)}</div>
+        <div className="case-dots">{caseStudies.map((study, index) => <button key={study.client} onClick={() => setActive(index)} className={index === active ? "active" : ""} aria-label={`Show ${study.client} case study`} />)}</div>
       </div>
     </section>
   );
@@ -242,10 +242,10 @@ function Why() {
   return (
     <section className="section why dot-grid" id="about">
       <div className="container-elite">
-        <SectionHeading tag="✦ Why Prime Polo" title={<>Built Like a <span className="text-gradient-royal">Product Team</span></>} copy="A deliberately different operating model for brands that value speed, seniority and truth." align="center" />
+        <SectionHeading tag="✦ Why Prime Polo" title={<>Built Like a <span className="text-gradient-royal">Product Team</span></>} copy="A deliberately different operating model for brands that won't settle." />
         <div className="reasons-grid">{reasons.map((reason, index) => { const Icon = reason.icon; return <Reveal key={reason.title} delay={(index % 3) * 0.07}><article className="reason-item"><span><Icon /></span><h3>{reason.title}</h3><p>{reason.description}</p></article></Reveal>; })}</div>
         <Reveal className="story-panel glass-gold">
-          <div className="story-copy"><span className="section-tag">Our Story</span><h3>Small roster.<br />Uncommon depth.</h3><p>Prime Polo was founded in 2018 by senior marketers from luxury houses and VC-backed startups who believed agencies had become too distant from the work.</p><p>We deliberately limit our roster. Every engagement is led and executed by specialists with 10+ years of experience. No junior staffing. No opaque handoffs. Just a focused team with the range to find the constraint and the craft to move it.</p><div className="signature">Elena Vasquez <span>Founder & CEO</span></div></div>
+          <div className="story-copy"><span className="section-tag">Our Story</span><h3>Small roster.<br />Uncommon depth.</h3><p>Prime Polo was founded in 2018 by senior marketers from luxury hospitality, technology and direct-to-consumer brands. We built systems, not services. Today, we work with 120+ brands across geographies and categories.</p></div>
           <div className="story-stats">{[["2018", "Founded"], ["120+", "Brands Grown"], ["$80M", "Media Managed"], ["94%", "Retention"]].map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}</div>
         </Reveal>
         <div className="team-strip">{team.map(([name, role, initials]) => <div key={name}><span>{initials}</span><strong>{name}<small>{role}</small></strong></div>)}</div>
@@ -258,9 +258,9 @@ function Process() {
   return (
     <section className="section process" id="process">
       <div className="container-elite process-layout">
-        <div className="process-heading"><SectionHeading tag="✦ Process" title={<>From Discovery<br />to <span className="text-gradient-gold">Scale</span></>} copy="A high-velocity operating rhythm designed to learn quickly and compound what works." /><div className="process-orbit"><MousePointer2 /><span>5 stages</span></div></div>
+        <div className="process-heading"><SectionHeading tag="✦ Process" title={<>From Discovery<br />to <span className="text-gradient-gold">Scale</span></>} copy="A high-velocity operating rhythm built for compounding growth." /></div>
         <div className="timeline">
-          {processSteps.map(([number, title, description, Icon], index) => <Reveal key={title} delay={index * 0.05}><article className="timeline-item"><div className="timeline-rail"><span><Icon /></span></div><div className="timeline-content"><small>{number} / 05</small><h3>{title}</h3><p>{description}</p></div></article></Reveal>)}
+          {processSteps.map(([number, title, description, Icon], index) => <Reveal key={title} delay={index * 0.05}><article className="timeline-item"><div className="timeline-rail"><span><Icon /></span></div><div><b>{number}</b><h3>{title}</h3><p>{description}</p></div></article></Reveal>)}
         </div>
       </div>
     </section>
@@ -274,12 +274,12 @@ function Testimonials() {
   return (
     <section className="section testimonials">
       <div className="container-elite">
-        <SectionHeading tag="✦ Testimonials" title={<>Loved by <span className="text-gradient-elite">Growth Leaders</span></>} copy="Partnerships measured by what moved and how it felt to get there." align="center" />
+        <SectionHeading tag="✦ Testimonials" title={<>Loved by <span className="text-gradient-elite">Growth Leaders</span></>} copy="Partnerships measured by what moved and how it felt to get there." />
         <div className="testimonial-stage">
-          <div className="quote-mark">“</div>
-          <AnimatePresence mode="wait"><motion.article key={item.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}><div className="stars">{Array.from({ length: 5 }, (_, index) => <Star key={index} fill="currentColor" />)}</div><blockquote>{item.quote}</blockquote><div className="testimonial-person"><span>{item.avatar}</span><strong>{item.name}<small>{item.role}</small></strong><b>{item.result}</b></div></motion.article></AnimatePresence>
+          <div className="quote-mark">"</div>
+          <AnimatePresence mode="wait"><motion.article key={item.name} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}><div className="stars">{Array.from({ length: 5 }).map((_, i) => <Star key={i} size={16} fill="currentColor" />)}</div><p>{item.quote}</p><div><strong>{item.name}</strong><small>{item.title}</small></div></motion.article></AnimatePresence>
         </div>
-        <div className="testimonial-tabs">{testimonials.map((testimonial, index) => <button key={testimonial.name} onClick={() => setActive(index)} className={index === active ? "active" : ""}><span>{testimonial.avatar}</span><i /></button>)}</div>
+        <div className="testimonial-tabs">{testimonials.map((testimonial, index) => <button key={testimonial.name} onClick={() => setActive(index)} className={index === active ? "active" : ""} aria-label={`${testimonial.name} testimonial`}><span>{testimonial.name.split(" ")[0]}</span></button>)}</div>
       </div>
     </section>
   );
@@ -293,7 +293,7 @@ function formatInr(value: number) {
 
 function Slider({ label, value, min, max, step, onChange, formatted }: { label: string; value: number; min: number; max: number; step: number; onChange: (value: number) => void; formatted: string }) {
   const progress = ((value - min) / (max - min)) * 100;
-  return <label className="slider-field"><span>{label}<strong>{formatted}</strong></span><input type="range" min={min} max={max} step={step} value={value} onChange={(event) => onChange(Number(event.target.value))} style={{ background: `linear-gradient(90deg, #8b3dff ${progress}%, var(--range-track) ${progress}%)` }} /><small><i>{label === "Monthly Leads" ? min : formatInr(min)}</i><i>{label === "Monthly Leads" ? max : formatInr(max)}</i></small></label>;
+  return <label className="slider-field"><span>{label}<strong>{formatted}</strong></span><input type="range" min={min} max={max} step={step} value={value} onChange={(event) => onChange(Number(event.currentTarget.value))} style={{ background: `linear-gradient(to right, rgb(218, 165, 32) 0%, rgb(218, 165, 32) ${progress}%, rgb(255, 255, 255, 0.1) ${progress}%, rgb(255, 255, 255, 0.1) 100%)` }} /></label>;
 }
 
 function Calculator() {
@@ -304,10 +304,10 @@ function Calculator() {
   return (
     <section className="section calculator dot-grid" id="calculator">
       <div className="container-elite">
-        <SectionHeading tag="✦ Calculator" title={<>See Your <span className="text-gradient-gold">Growth Potential</span></>} copy="Model the upside using the average performance profile across Prime Polo engagements." align="center" />
+        <SectionHeading tag="✦ Calculator" title={<>See Your <span className="text-gradient-gold">Growth Potential</span></>} copy="Model the upside using the average performance profile across our active portfolio." />
         <Reveal className="calculator-shell glass-elite">
-          <div className="calculator-inputs"><h3>Adjust your baseline</h3><p>Move the sliders to match your current operating picture.</p><Slider label="Annual Revenue" value={revenue} min={500_000} max={100_000_000} step={500_000} onChange={setRevenue} formatted={formatInr(revenue)} /><Slider label="Monthly Leads" value={leads} min={50} max={5000} step={50} onChange={setLeads} formatted={leads.toLocaleString("en-IN")} /><Slider label="Monthly Ad Spend" value={spend} min={50_000} max={5_000_000} step={50_000} onChange={setSpend} formatted={formatInr(spend)} /></div>
-          <div className="calculator-results"><div className="calc-overline"><Sparkles />Projected with Prime Polo</div><div className="calc-primary"><span>Projected Revenue</span><strong>{formatInr(projections.revenue)}</strong><small>+42% modeled annual uplift</small></div><div className="calc-grid"><div><BadgeIndianRupee /><span>Additional Revenue</span><strong>{formatInr(projections.additional)}</strong></div><div><Users /><span>Projected Monthly Leads</span><strong>{projections.leads.toLocaleString("en-IN")}</strong></div></div><div className="roas-badge"><Gauge /><span><strong>7.1×</strong> Average ROAS benchmark</span></div><PrimaryButton href="#contact">Get Custom Plan</PrimaryButton></div>
+          <div className="calculator-inputs"><h3>Adjust your baseline</h3><p>Move the sliders to match your current operating picture.</p><Slider label="Annual Revenue" value={revenue} min={500_000} max={500_000_000} step={100_000} onChange={setRevenue} formatted={formatInr(revenue)} /><Slider label="Monthly Leads" value={leads} min={10} max={10_000} step={10} onChange={setLeads} formatted={`${leads}` + " leads"} /><Slider label="Monthly Ad Spend" value={spend} min={10_000} max={10_000_000} step={10_000} onChange={setSpend} formatted={formatInr(spend)} /></div>
+          <div className="calculator-results"><div className="calc-overline"><Sparkles />Projected with Prime Polo</div><div className="calc-primary"><span>Projected Revenue</span><strong>{formatInr(projections.revenue)}</strong><small>+{formatInr(projections.additional)}</small></div><div className="calc-secondary"><div><span>Projected Leads</span><strong>{projections.leads}</strong></div></div></div>
         </Reveal>
         <p className="calculator-note">Illustrative estimates based on portfolio averages. Results vary by category, offer and baseline.</p>
       </div>
@@ -320,8 +320,8 @@ function FAQ() {
   return (
     <section className="section faq" id="faq">
       <div className="container-elite faq-layout">
-        <div><SectionHeading tag="✦ FAQ" title={<>Frequently<br /><span className="text-gradient-royal">Asked</span></>} copy="Straight answers before we start the conversation." /><a href="mailto:primepolo03@gmail.com" className="faq-email"><Mail />Still curious?<span>primepolo03@gmail.com</span></a></div>
-        <div className="faq-list">{faqs.map(([question, answer], index) => <article key={question} className={index === open ? "active" : ""}><button onClick={() => setOpen(index === open ? -1 : index)}><span>0{index + 1}</span><strong>{question}</strong><i>{index === open ? <Minus /> : <Plus />}</i></button><AnimatePresence initial={false}>{index === open && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}><p>{answer}</p></motion.div>}</AnimatePresence></article>)}</div>
+        <div><SectionHeading tag="✦ FAQ" title={<>Frequently<br /><span className="text-gradient-royal">Asked</span></>} copy="Straight answers before we start the conversation." /><a href="mailto:primepolo03@gmail.com?subject=Prime%20Polo%20Question" className="faq-email"><Mail /> primepolo03@gmail.com</a></div>
+        <div className="faq-list">{faqs.map(([question, answer], index) => <article key={question} className={index === open ? "active" : ""}><button onClick={() => setOpen(index === open ? -1 : index)}><span>{question}</span><X /></button><div><p>{answer}</p></div></article>)}</div>
       </div>
     </section>
   );
@@ -333,31 +333,41 @@ function Contact() {
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formElement = event.currentTarget;
-    setStatus("loading"); setMessage("");
+    setStatus("loading");
+    setMessage("");
     const form = new FormData(event.currentTarget);
     const values = Object.fromEntries(Array.from(form.entries()).map(([key, value]) => [key, String(value).trim().slice(0, key === "message" ? 2000 : 200)]));
-    if (!values.name || !/^\S+@\S+\.\S+$/.test(values.email) || !values.message) { setStatus("error"); setMessage("Please add your name, a valid email and a short project brief."); return; }
-    if (!isSupabaseConfigured) { setStatus("error"); setMessage("Supabase is not connected yet. Email us directly at primepolo03@gmail.com."); return; }
+    if (!values.name || !/^\S+@\S+\.\S+$/.test(values.email) || !values.message) {
+      setStatus("error");
+      setMessage("Please add your name, a valid email and a short project brief.");
+      return;
+    }
+    if (!isSupabaseConfigured) {
+      setStatus("error");
+      setMessage("Supabase is not connected yet. Email us directly at primepolo03@gmail.com.");
+      return;
+    }
     try {
-      console.log("[Contact] Submitting lead:", values);
       const { data, error } = await supabase.from("leads").insert(values).select();
-      console.log("[Contact] Supabase response:", { data, error });
       if (error) throw error;
       await Promise.allSettled([sendBusinessEmail("New Prime Polo growth inquiry", Object.entries(values).map(([key, value]) => `${key}: ${value}`).join("\n"), values.email)]);
-      setStatus("success"); setMessage("Message Sent Successfully"); playSound("success"); formElement.reset();
+      setStatus("success");
+      setMessage("Message Sent Successfully");
+      playSound("success");
+      formElement.reset();
     } catch (error) {
-      console.error("[Contact] Submit error:", error);
-      setStatus("error"); setMessage(error instanceof Error ? error.message : "The form could not be submitted. Please try again.");
+      setStatus("error");
+      setMessage(error instanceof Error ? error.message : "The form could not be submitted. Please try again.");
     }
   };
   return (
     <section className="section contact" id="contact">
       <Aurora compact />
       <div className="container-elite relative z-10">
-        <SectionHeading tag="✦ Start a Conversation" title={<>Ready to engineer<br /><span className="text-gradient-elite">what comes next?</span></>} copy="Tell us where growth is getting stuck. We will come back with a clear point of view." />
+        <SectionHeading tag="✦ Start a Conversation" title={<>Ready to engineer<br /><span className="text-gradient-elite">what comes next?</span></>} copy="Tell us where growth is getting stuck. We'll map a path forward." />
         <div className="contact-layout">
-          <Reveal><form className="contact-form glass-elite" onSubmit={submit}><div className="form-grid"><label><span>Name *</span><input name="name" placeholder="Your full name" maxLength={120} required /></label><label><span>Email *</span><input name="email" type="email" placeholder="you@company.com" maxLength={160} required /></label><label><span>Phone</span><input name="phone" type="tel" placeholder="+91 98765 43210" maxLength={30} /></label><label><span>Company</span><input name="company" placeholder="Company name" maxLength={160} /></label><label><span>Service</span><select name="service" defaultValue=""><option value="" disabled>Select a focus</option>{services.map((service) => <option key={service.title}>{service.title}</option>)}</select></label><label><span>Monthly Budget</span><select name="budget" defaultValue=""><option value="" disabled>Select a range</option><option>INR 2L-5L</option><option>INR 5L-15L</option><option>INR 15L-50L</option><option>INR 50L+</option></select></label></div><label><span>What are we solving? *</span><textarea name="message" placeholder="Share the target, context and constraint..." maxLength={2000} required /></label><div className="form-submit"><PrimaryButton type="submit" disabled={status === "loading"}>{status === "loading" ? "Sending Brief..." : "Send Growth Brief"}</PrimaryButton><small>By submitting, you agree to our Privacy Policy.</small></div>{message && <div className={`form-message ${status}`}>{status === "success" ? <Check /> : <X />}{message}</div>}</form></Reveal>
-          <Reveal className="contact-side" delay={0.12}><div className="contact-details"><span>Direct line</span><a href="mailto:primepolo03@gmail.com"><Mail />primepolo03@gmail.com</a><p><MapPin />New Delhi, India</p><p><Clock3 />Mon-Fri, 10:00-19:00 IST</p></div><div className="map-visual"><div className="map-grid" /><svg viewBox="0 0 400 260" aria-label="Prime Polo location map in New Delhi"><path d="M-20 90 C70 65 92 116 150 93 S252 53 420 78" /><path d="M-20 190 C75 140 118 184 180 159 S298 146 430 185" /><path d="M88 -20 C112 53 95 105 129 143 S162 210 150 290" /><path d="M287 -20 C265 62 290 106 270 164 S270 230 294 290" /></svg><div className="map-pin"><span><MapPin /></span><i /><strong>PRIME POLO<small>New Delhi</small></strong></div><div className="coordinates">28.6139° N<br />77.2090° E</div></div></Reveal>
+          <Reveal><form className="contact-form glass-elite" onSubmit={submit}><div className="form-grid"><label><span>Name *</span><input name="name" placeholder="Your full name" maxLength={120} required /></label><label><span>Email *</span><input name="email" type="email" placeholder="you@company.com" maxLength={120} required /></label><label><span>Company</span><input name="company" placeholder="Your company" maxLength={120} /></label><label><span>Phone</span><input name="phone" type="tel" placeholder="+91 98765 43210" maxLength={20} /></label><label><span>Service of interest</span><input name="service" placeholder="Growth strategy, SEO, Paid media, etc" maxLength={120} /></label><label><span>Budget range</span><input name="budget" placeholder="INR 2L - 50L+ per month" maxLength={120} /></label></div><label className="full-width"><span>Tell us about your vision *</span><textarea name="message" placeholder="What are you building? What's the challenge? What would success look like?" maxLength={2000} required /></label>{message && <div className={`form-notice ${status}`}>{message}</div>}<button type="submit" className="btn-primary" disabled={status === "loading"}>{status === "loading" ? "Sending..." : "Start Conversation"}</button></form></Reveal>
+          <Reveal className="contact-side" delay={0.12}><div className="contact-details"><span>Direct line</span><a href="mailto:primepolo03@gmail.com"><Mail />primepolo03@gmail.com</a><p><MapPin /> New Delhi, India</p><p>Available Monday—Friday, 10:00 – 19:00 IST</p></div></Reveal>
         </div>
       </div>
     </section>
@@ -365,7 +375,7 @@ function Contact() {
 }
 
 function Marquee() {
-  return <div className="marquee"><motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 24, repeat: Infinity, ease: "linear" }}>{Array.from({ length: 2 }, (_, group) => <div key={group}>{["AI-FIRST EXECUTION", "SENIOR-ONLY TEAMS", "LIVE REPORTING", "COMMERCIAL OUTCOMES", "3× FASTER DELIVERY"].map((item) => <span key={`${group}-${item}`}>{item}<i>✦</i></span>)}</div>)}</motion.div></div>;
+  return <div className="marquee"><motion.div animate={{ x: ["0%", "-50%"] }} transition={{ duration: 24, repeat: Infinity, ease: "linear" }}>{Array.from({ length: 2 }, (_, group) => <div key={group}>{Array.from({ length: 8 }, (_, i) => <span key={i}>✦ Growth Engineered ✦</span>)}</div>)}</motion.div></div>;
 }
 
 export function HomePage() {
