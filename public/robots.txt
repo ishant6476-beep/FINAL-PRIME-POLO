@@ -3,11 +3,20 @@
 
 User-agent: *
 Allow: /
+Allow: /solutions
+Allow: /services
+Allow: /industries
+Allow: /results
+Allow: /about
+Allow: /process
+Allow: /contact
+Allow: /terms
+Allow: /privacy
 
-# Block admin area
+# Block private routes
+Disallow: /dashboard
 Disallow: /admin
-
-# Block API routes
 Disallow: /api
 
+Crawl-delay: 1
 Sitemap: https://primepolomarketing.in/sitemap.xml
